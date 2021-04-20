@@ -1,4 +1,4 @@
-from quart import Quart, render_template, send_file, request
+from quart import Quart, render_template, send_file, request, redirect
 import json
 
 app = Quart(__name__)
@@ -38,9 +38,10 @@ async def faq_page():
     return await render_template("faq.html")
 
 
-@app.route('/contact')
-async def contact_page():
-    return await render_template("contact.html")
+@app.route('/contact', defaults={'formsubmit': False})
+@app.route('/contact?<formsubmit>')
+async def contact_page(formsubmit):
+    return await render_template("contact.html", formsubmit=formsubmit)
 
 
 @app.route("/form_submit", methods=["POST"])
@@ -51,7 +52,7 @@ async def fom_submit():
     message = form.get("message")
     formdata = {"name": name, "email": email, "message": message}
     save_contact_form(formdata)
-    return await render_template("contact.html", form_submit=True)
+    return await redirect("/contact?formsubmit")
 
 
 @app.route("/static/bootstrap/js/bootstrap.js", methods=["GET"])
