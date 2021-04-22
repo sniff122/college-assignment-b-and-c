@@ -1,16 +1,16 @@
-[
-  {
-  "Nissan Micra 3dr": "NissanMicra3dr.png",
-  "Ford Fiesta 3dr": "FordFiesta3dr.png",
-  "Ford Fiesta 5dr": "FortFiesta5dr.png",
-  "Opel Asra 5dr A/C": "OpelAstra5drAC.png"
+{
+  "Compact Cars": {
+    "Nissan Micra 3dr": "NissanMicra3dr.png",
+    "Ford Fiesta 3dr": "FordFiesta3dr.png",
+    "Ford Fiesta 5dr": "FortFiesta5dr.png",
+    "Opel Asra 5dr A/C": "OpelAstra5drAC.png"
   },
-  {
-  "Opel Vectra": "OpelVectra.png",
-  "Opel Vectra 2.0 A/C": "OpelVectra2AC.png"
+  "Family Sized Cars": {
+    "Opel Vectra": "OpelVectra.png",
+    "Opel Vectra 2.0 A/C": "OpelVectra2AC.png"
   },
-  {
-  "Vauxhall Astra Estate A/C": "VauxhallAstraEstateAC.png",
-  "Vauxhall Vectra Estate A/C": "VauxhallVectraEstateAC.png"
+  "Estate Cars": {
+    "Vauxhall Astra Estate A/C": "VauxhallAstraEstateAC.png",
+    "Vauxhall Vectra Estate A/C": "VauxhallVectraEstateAC.png"
   }
-]
+}
