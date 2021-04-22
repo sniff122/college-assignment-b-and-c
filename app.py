@@ -63,6 +63,14 @@ async def bootstrapJS():
         return {"Error": 404, "Info": "File Not Found"}
 
 
+@app.route("/favicon.ico", methods=["GET"])
+async def favicon():
+    try:
+        return await send_file("static/images/favicon.ico")
+    except FileNotFoundError:
+        return {"Error": 404, "Info": "File Not Found"}
+
+
 @app.route("/static/bootstrap/css/bootstrap.min.css", methods=["GET"])
 async def bootstrapCSS():
     try:
