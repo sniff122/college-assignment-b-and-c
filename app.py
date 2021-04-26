@@ -38,10 +38,14 @@ async def faq_page():
     return await render_template("faq.html")
 
 
-@app.route('/contact', defaults={'formsubmit': False})
-@app.route('/contact?<formsubmit>')
+@app.route('/contact', defaults={'formsubmit': "False"})
+@app.route('/contact/<formsubmit>')
 async def contact_page(formsubmit):
-    return await render_template("contact.html", formsubmit=formsubmit)
+    if formsubmit != "True":
+        formsubmit = False
+    else:
+        formsubmit = True
+    return await render_template("contact.html", formsubmit=bool(formsubmit))
 
 
 @app.route("/form_submit", methods=["POST"])
@@ -52,7 +56,7 @@ async def fom_submit():
     message = form.get("message")
     formdata = {"name": name, "email": email, "message": message}
     save_contact_form(formdata)
-    return await redirect("/contact?formsubmit")
+    return redirect("/contact/True")
 
 
 @app.route("/static/bootstrap/js/bootstrap.js", methods=["GET"])
@@ -104,4 +108,4 @@ async def get_the_car(carimg):
 
 
 if __name__ == '__main__':
-    app.run(debug=True, use_reloader=False, port=app.port, host=app.host)
+    app.run(debug=False, use_reloader=False, port=app.port, host=app.host)
