@@ -6,8 +6,7 @@ app.Title = "Motor Rent"
 app.port = 5000
 app.host = "127.0.0.1"
 with open("cars.json", "r") as f:
-    cars = json.load(f)
-app.cars = cars
+    app.cars = json.load(f)
 
 
 def save_contact_form(formdata):
