@@ -1,5 +1,6 @@
 from quart import Quart, render_template, send_file, request, redirect
 import json
+import base64
 
 app = Quart(__name__)
 app.Title = "Motor Rent"
@@ -7,6 +8,10 @@ app.port = 5000
 app.host = "127.0.0.1"
 with open("cars.json", "r") as f:
     app.cars = json.load(f)
+
+logoimage = base64.b64encode(open("static/images/logo.png", "rb").read()).decode("utf-8")
+carimage = base64.b64encode(open("static/images/car.png", "rb").read()).decode("utf-8")
+businessimage = base64.b64encode(open("static/images/business.png", "rb").read()).decode("utf-8")
 
 
 def save_contact_form(formdata):
@@ -19,22 +24,22 @@ def save_contact_form(formdata):
 
 @app.route('/')
 async def index_page():
-    return await render_template("index.html")
+    return await render_template("index.html", logoimage=logoimage, carimage=carimage)
 
 
 @app.route('/about')
 async def about_page():
-    return await render_template("about.html")
+    return await render_template("about.html", logoimage=logoimage, businessimage=businessimage)
 
 
 @app.route('/cars')
 async def cars_page():
-    return await render_template("cars.html", cars=app.cars)
+    return await render_template("cars.html", cars=app.cars, logoimage=logoimage)
 
 
 @app.route('/faq')
 async def faq_page():
-    return await render_template("faq.html")
+    return await render_template("faq.html", logoimage=logoimage)
 
 
 @app.route('/contact', defaults={'formsubmit': "False"})
@@ -44,7 +49,7 @@ async def contact_page(formsubmit):
         formsubmit = False
     else:
         formsubmit = True
-    return await render_template("contact.html", formsubmit=bool(formsubmit))
+    return await render_template("contact.html", formsubmit=bool(formsubmit), logoimage=logoimage)
 
 
 @app.route("/form_submit", methods=["POST"])
@@ -83,7 +88,7 @@ async def bootstrapCSS():
 
 
 @app.route("/static/images/logo.png", methods=["GET"])
-async def carimage():
+async def carimagerequest():
     try:
         return await send_file("static/images/logo.png")
     except FileNotFoundError:
